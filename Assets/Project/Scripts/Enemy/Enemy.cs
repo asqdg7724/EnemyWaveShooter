@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     Transform targetPos;
     Transform thisPos;
-    NavMeshAgent navMeshAgent;
+    NavMeshAgent agent;
 
     GameObject player;
     private PlayerHp playerHp;
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         targetPos = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         thisPos = GetComponent<Transform>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void OnTriggerEnter(Collider col)
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navMeshAgent.destination = targetPos.position;
+        agent.destination = targetPos.position;
 
         timer += Time.deltaTime;
 
@@ -62,8 +62,7 @@ public class Enemy : MonoBehaviour
 
         if (playerHp.hp <= 0)
         {
-            navMeshAgent.destination = thisPos.position;
-
+            agent.destination = thisPos.position;
         }
     }
 
