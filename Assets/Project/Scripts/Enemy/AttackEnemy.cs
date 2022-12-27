@@ -13,6 +13,7 @@ public class AttackEnemy : MonoBehaviour
     private PlayerHp playerHp;
     Animator animator;
 
+    public GameObject attackCol;
     public float dmgDelay = 0.5f;
     public float atkDelay = 1.5f;
     public int atkDamge = 10;
@@ -55,18 +56,21 @@ public class AttackEnemy : MonoBehaviour
             alreadyAttack = false;
             agent.destination = thisPos.position;
             animator.SetBool("isMoving", false);
+            animator.SetTrigger("Attack");
             Attack();
         }
     }
 
     void Attack()
     {
-        animator.SetTrigger("Attack");
+        
+        attackCol.SetActive(true);
         Invoke(nameof(AttackReset), atkDelay);
     }
 
     void AttackReset()
     {
+        attackCol.SetActive(false);
         animator.SetTrigger("Idle");
         alreadyAttack = true;
     }

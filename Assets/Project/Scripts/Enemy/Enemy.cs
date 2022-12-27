@@ -64,6 +64,11 @@ public class Enemy : MonoBehaviour
         {
             agent.destination = thisPos.position;
         }
+
+        if (Input.GetKey(KeyCode.Backspace))
+        {
+            Die();
+        }
     }
 
     void Attack()
@@ -74,5 +79,12 @@ public class Enemy : MonoBehaviour
         {
             playerHp.TakeDamage(atkDamge);
         }
+    }
+
+    void Die()
+    {
+        gameObject.SetActive(false);
+
+        EnemySpawner.e_spawner.InsertQueue(gameObject);
     }
 }
