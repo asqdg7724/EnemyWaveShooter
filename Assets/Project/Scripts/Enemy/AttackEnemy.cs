@@ -47,6 +47,7 @@ public class AttackEnemy : MonoBehaviour
 
         if (!playerInRange && alreadyAttack)
         {
+            agent.enabled = true;
             agent.destination = targetPos.position;
             animator.SetBool("isMoving", true);
         }
@@ -54,7 +55,7 @@ public class AttackEnemy : MonoBehaviour
         else if (playerInRange && alreadyAttack)
         {
             alreadyAttack = false;
-            agent.destination = thisPos.position;
+            agent.enabled = false;
             animator.SetBool("isMoving", false);
             animator.SetTrigger("Attack");
             Attack();

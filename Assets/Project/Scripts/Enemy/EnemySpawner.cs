@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public float spawnTime;
     public GameObject enemy;
     public static EnemySpawner e_spawner;
     public Queue<GameObject> e_queue = new Queue<GameObject>();
@@ -51,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
                 GameObject t_object = GetQueue();
                 t_object.transform.position = gameObject.transform.position + randomVector;
             }
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(spawnTime);
         }
     }
 }

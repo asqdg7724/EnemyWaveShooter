@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     GameObject player;
     private PlayerHp playerHp;
 
+    public int enemyHp = 5;
     public float dmgDelay = 0.5f;
     public int atkDamge = 10;
 
@@ -62,12 +63,7 @@ public class Enemy : MonoBehaviour
 
         if (playerHp.hp <= 0)
         {
-            agent.destination = thisPos.position;
-        }
-
-        if (Input.GetKey(KeyCode.Backspace))
-        {
-            Die();
+            agent.enabled = false;
         }
     }
 
@@ -79,12 +75,5 @@ public class Enemy : MonoBehaviour
         {
             playerHp.TakeDamage(atkDamge);
         }
-    }
-
-    void Die()
-    {
-        gameObject.SetActive(false);
-
-        EnemySpawner.e_spawner.InsertQueue(gameObject);
     }
 }
