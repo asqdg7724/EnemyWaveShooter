@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Image fadeImg;
     public Text wave_Txt;
     public Text score_Txt;
     public GameObject pauseMenu;
@@ -22,6 +23,11 @@ public class GameManager : MonoBehaviour
         gmg = GetComponent<GameManager>();
         score = 0;
         WaveStrong();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FadeIn(2f, true));
     }
 
     // Update is called once per frame
@@ -45,9 +51,9 @@ public class GameManager : MonoBehaviour
 
     public void WaveStrong()
     {
-        if (enemyCount % 30 == 0)
+        if (enemyCount == 5)
         {
-            waveGrade ++;
+            waveGrade++;
         }
     }
 
@@ -76,5 +82,27 @@ public class GameManager : MonoBehaviour
     public void OpenGameOver()
     {
         gameOverMenu.SetActive(true);
+    }
+
+    IEnumerator FadeIn(float fadeTime, bool isFadeEnded)
+    {
+        float t = 0;
+
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+
+            float percent = t / fadeTime;
+
+            if (isFadeEnded)
+
+                fadeImg.color = new Color(fadeImg.color.r, fadeImg.color.g, fadeImg.color.b, Mathf.Lerp(1f, 0, percent));
+
+
+            yield return null;
+
+        }
+
+        isFadeEnded = false;
     }
 }
