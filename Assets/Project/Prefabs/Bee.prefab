@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 2618397864656421927}
   m_Layer: 0
   m_Name: Bee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -764,6 +764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2618397864199397928}
   - component: {fileID: 2618397864199397929}
+  - component: {fileID: 3293962434116929797}
   m_Layer: 0
   m_Name: AttackCol
   m_TagString: Untagged
@@ -800,3 +801,15 @@ CapsuleCollider:
   m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0.15, z: 0}
+--- !u!114 &3293962434116929797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2618397864199397931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe14be3922a6b8145b642e0d8c436c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

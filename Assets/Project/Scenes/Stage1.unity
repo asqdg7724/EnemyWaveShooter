@@ -884,21 +884,6 @@ MonoBehaviour:
   flashColor: {r: 1, g: 0, b: 0, a: 0.1}
   isDead: 0
   isDamage: 0
---- !u!114 &70062280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64786396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a68151806b509cb438b79ad8912ef597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 1
-  shootDelay: 0.15
-  range: 100
 --- !u!1001 &71319109
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10226,7 +10211,7 @@ GameObject:
   - component: {fileID: 1000586740}
   - component: {fileID: 1000586739}
   - component: {fileID: 1000586741}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FirePos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10422,7 +10407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  shootDelay: 0.15
+  timeBetweenBullets: 0.15
   range: 100
 --- !u!1 &1022230991
 GameObject:

@@ -24,7 +24,6 @@ public class PlayerHp : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerCtrl = GetComponent<PlayerController>();
-
         hp = maxHp;
     }
 

@@ -45,9 +45,9 @@ public class GameManager : MonoBehaviour
 
     public void WaveStrong()
     {
-        if (enemyCount >= 2)
+        if (enemyCount % 30 == 0)
         {
-            waveGrade++;
+            waveGrade ++;
         }
     }
 

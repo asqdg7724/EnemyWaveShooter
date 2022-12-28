@@ -10,11 +10,13 @@ public class EnemyHealth : MonoBehaviour
     int enemyHp;
     public int enemyScore;
 
+    public static EnemyHealth eh;
     private GameManager gmg;
 
     // Start is called before the first frame update
     void Awake()
     {
+        eh = GetComponent<EnemyHealth>();
         enemyHp = maxEnemyHp;
     }
 
@@ -27,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(int amount, Vector3 hitPoint)
     {
         enemyHp -= amount;
 

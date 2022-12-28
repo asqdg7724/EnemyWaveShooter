@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
+    private PlayerHp playerHp;
+    GameObject player;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerHp = player.GetComponent<PlayerHp>();
     }
 
     // Update is called once per frame
@@ -20,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-
+            playerHp.TakeDamage(5);
         }
     }
 
