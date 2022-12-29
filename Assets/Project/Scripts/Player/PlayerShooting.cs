@@ -72,6 +72,7 @@ public class PlayerShooting : MonoBehaviour
                     if (eh != null)
                     {
                         eh.TakeDamage(damage, shootHit.point);
+                        Debug.Log("¸ÂÀ½!");
                     }
                 }
             }
