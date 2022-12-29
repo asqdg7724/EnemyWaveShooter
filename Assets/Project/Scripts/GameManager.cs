@@ -14,7 +14,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager gmg;
     public static int score;
-    public static int waveGrade = 1;
+    public static int wave = 1;
+    public static int maxWave;
     public static int enemyCount;
 
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         score_Txt.text = score.ToString();
-        wave_Txt.text = waveGrade.ToString();
+        wave_Txt.text = wave.ToString();
 
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -53,7 +54,7 @@ public class GameManager : MonoBehaviour
     {
         if (enemyCount == 5)
         {
-            waveGrade++;
+            wave++;
         }
     }
 
