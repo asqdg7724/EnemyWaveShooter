@@ -8,6 +8,11 @@ public class BossAttack : MonoBehaviour
 
     private BossMovement bossMove;
     private static BossAttack bossAtk;
+    public SphereCollider attackCol;
+
+    GameObject player;
+
+    private PlayerHp playerHp;
 
     public float atkDelay = 1f;
 
@@ -15,14 +20,17 @@ public class BossAttack : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        bossMove = GetComponent<BossMovement>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        animator = GetComponentInParent<Animator>();
+        bossMove = GetComponentInParent<BossMovement>();
+        attackCol = GetComponent<SphereCollider>();
+        playerHp = player.GetComponent<PlayerHp>();
     }
 
     // Update is called once per frame
@@ -34,12 +42,14 @@ public class BossAttack : MonoBehaviour
     public void Attack()
     {
         animator.SetTrigger("Attack");
+        attackCol.enabled = true;
         Invoke(nameof(AttackReady), atkDelay);
     }
 
     public void AttackReady()
     {
         animator.SetTrigger("Idle");
+        attackCol.enabled = false;
     }
 
     IEnumerator AttackReset()
@@ -47,5 +57,15 @@ public class BossAttack : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         animator.SetTrigger("Idle");
+
+        attackCol.enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.tag == "Player")
+        {
+            playerHp.TakeDamage(10);
+        }
     }
 }

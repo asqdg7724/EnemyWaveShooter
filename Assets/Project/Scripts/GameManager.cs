@@ -16,14 +16,14 @@ public class GameManager : MonoBehaviour
     public static int score;
     public static int wave = 1;
     public static int maxWave;
-    public static int enemyCount;
+    public int enemyCount;
 
     // Start is called before the first frame update
     void Awake()
     {
         gmg = GetComponent<GameManager>();
         score = 0;
-        WaveStrong();
+        
     }
 
     private void Start()
@@ -48,13 +48,15 @@ public class GameManager : MonoBehaviour
         enemyCount++;
 
         score = score + e_score;
+
+        WaveStrong();
     }
 
     public void WaveStrong()
     {
-        if (enemyCount == 5)
+        if (enemyCount % 30 == 0)
         {
-            wave++;
+            wave += 1;
         }
     }
 
@@ -78,6 +80,13 @@ public class GameManager : MonoBehaviour
     public void RetryButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void PushNextButton()
+    {
+        wave = 1;
+        score = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void OpenGameOver()

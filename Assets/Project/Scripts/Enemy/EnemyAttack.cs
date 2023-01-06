@@ -24,7 +24,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            playerHp.TakeDamage(5);
+            playerHp.TakeDamage(10);
         }
     }
 

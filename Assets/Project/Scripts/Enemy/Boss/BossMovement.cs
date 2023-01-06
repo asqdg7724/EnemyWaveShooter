@@ -13,7 +13,7 @@ public class BossMovement : MonoBehaviour
     Animator animator;
 
     private bool playerInRange = false;
-    private bool alreadyAttack = true;
+    private bool alreadyAttack = false;
 
     public float attackRange = 2f;
     private BossAttack bossAtk;
@@ -24,7 +24,7 @@ public class BossMovement : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
-        bossAtk = GetComponent<BossAttack>();
+        bossAtk = GetComponentInChildren<BossAttack>();
     }
 
     // Start is called before the first frame update
@@ -40,10 +40,10 @@ public class BossMovement : MonoBehaviour
     {
         timer += Time.deltaTime;
         playerInRange = Physics.CheckSphere(thisPos.position, attackRange, 1 << 6);
+        agent.destination = targetPos.position;
 
-        if (!playerInRange && alreadyAttack)
+        if (!playerInRange && !alreadyAttack)
         {
-            agent.enabled = true;
             agent.destination = targetPos.position;
             animator.SetBool("isMoving", true);
             alreadyAttack = true;
@@ -51,11 +51,19 @@ public class BossMovement : MonoBehaviour
 
         else if (playerInRange && alreadyAttack)
         {
-            alreadyAttack = false;
             agent.destination = thisPos.position;
-            animator.SetBool("isMoving", false);
-            bossAtk.Attack();
+            StartCoroutine(Attack());
         }
+    }
+
+    IEnumerator Attack()
+    {
+        alreadyAttack = false;
+        animator.SetBool("isMoving", false);
+        bossAtk.Attack();
+        yield return new WaitForSeconds(3f);
+        alreadyAttack = true;
+        agent.destination = targetPos.position;
     }
 
     private void OnDrawGizmosSelected()
