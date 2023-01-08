@@ -46,8 +46,8 @@ public class EnemySpawner : MonoBehaviour
         {
             if (e_queue.Count != 0)
             {
-                xPos = Random.Range(-5, 5);
-                zPos = Random.Range(-5, 5);
+                xPos = Random.Range(-20, 20);
+                zPos = Random.Range(-20, 20);
                 randomVector = new Vector3(xPos, 0.0f, zPos);
                 GameObject t_object = GetQueue();
                 t_object.transform.position = gameObject.transform.position + randomVector;

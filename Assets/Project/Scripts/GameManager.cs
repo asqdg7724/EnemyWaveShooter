@@ -11,12 +11,13 @@ public class GameManager : MonoBehaviour
     public Text score_Txt;
     public GameObject pauseMenu;
     public GameObject gameOverMenu;
+    public List<GameObject> e_SpawnerList;
 
     public static GameManager gmg;
     public static int score;
     public static int wave = 1;
     public static int maxWave;
-    public int enemyCount;
+    public int enemyCount = 0;
 
     // Start is called before the first frame update
     void Awake()
@@ -57,6 +58,12 @@ public class GameManager : MonoBehaviour
         if (enemyCount % 30 == 0)
         {
             wave += 1;
+        }
+
+        if (wave == 5)
+        {
+            Debug.Log("°­ÇØÁü");
+            e_SpawnerList[1].SetActive(true);
         }
     }
 

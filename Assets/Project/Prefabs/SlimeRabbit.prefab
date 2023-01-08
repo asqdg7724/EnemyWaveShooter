@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cbd1cb8b2b30d145840b775f1afc63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHp: 5
+  enemyHp: 3
   dmgDelay: 0.5
   atkDamge: 10
 --- !u!114 &2390569999014344580
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40a152c6aaddfaa40a4c86e2c9597835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxEnemyHp: 10
+  maxEnemyHp: 3
   enemyScore: 100
 --- !u!1 &2390092658463205798
 GameObject:

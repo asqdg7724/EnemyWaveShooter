@@ -14,6 +14,7 @@ public class BossAttack : MonoBehaviour
 
     private PlayerHp playerHp;
 
+    public float dmgDelay = 0.5f;
     public float atkDelay = 1f;
 
     private float timer;
