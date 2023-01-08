@@ -55,16 +55,41 @@ public class GameManager : MonoBehaviour
 
     public void WaveStrong()
     {
-        if (enemyCount % 30 == 0)
+        if (enemyCount % 20 == 0)
         {
             wave += 1;
         }
 
-        if (wave == 5)
+        if (wave == 3)
         {
             Debug.Log("°­ÇØÁü");
             e_SpawnerList[1].SetActive(true);
         }
+
+        if (wave == 6)
+        {
+            Debug.Log("°­ÇØÁü");
+            e_SpawnerList[2].SetActive(true);
+        }
+
+        if (wave == 9)
+        {
+            Debug.Log("°­ÇØÁü");
+            e_SpawnerList[3].SetActive(true);
+        }
+
+        if (wave == 12)
+        {
+            Debug.Log("°­ÇØÁü");
+            e_SpawnerList[1].SetActive(true);
+        }
+
+        if (wave == 15)
+        {
+            Debug.Log("°­ÇØÁü");
+            GameObject.Find("Boss").SetActive(true);
+        }
+
     }
 
     public void OpenPasueMenu()
