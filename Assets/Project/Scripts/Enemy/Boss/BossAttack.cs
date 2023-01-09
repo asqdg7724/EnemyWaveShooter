@@ -69,4 +69,11 @@ public class BossAttack : MonoBehaviour
             playerHp.TakeDamage(10);
         }
     }
+
+    void AttackSlide()
+    {
+        animator.SetTrigger("Slide");
+
+        attackCol.enabled = true;
+    }
 }

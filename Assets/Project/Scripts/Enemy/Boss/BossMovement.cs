@@ -38,29 +38,37 @@ public class BossMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        agent.destination = targetPos.position;
+
         timer += Time.deltaTime;
         playerInRange = Physics.CheckSphere(thisPos.position, attackRange, 1 << 6);
-        agent.destination = targetPos.position;
 
         if (!playerInRange && !alreadyAttack)
         {
-            agent.destination = targetPos.position;
             animator.SetBool("isMoving", true);
             alreadyAttack = true;
         }
 
         else if (playerInRange && alreadyAttack)
         {
-            agent.destination = thisPos.position;
             StartCoroutine(Attack());
         }
     }
 
     IEnumerator Attack()
     {
-        alreadyAttack = false;
+        agent.enabled = false;
         animator.SetBool("isMoving", false);
         bossAtk.Attack();
+        yield return new WaitForSeconds(2f);
+        alreadyAttack = false;
+        agent.enabled = true;
+    }
+
+    IEnumerator SlideAttack()
+    {
+        alreadyAttack = false;
+        animator.SetBool("isMoving", true);
         yield return new WaitForSeconds(3f);
         alreadyAttack = true;
         agent.destination = targetPos.position;
