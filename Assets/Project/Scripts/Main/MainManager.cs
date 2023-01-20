@@ -7,14 +7,18 @@ using UnityEngine.SceneManagement;
 public class MainManager : MonoBehaviour
 {
     public GameObject optionMenu;
+    public AudioSource music;
     public Button starBtn;
     public Button optionBtn;
     public Button exitBtn;
 
+    public static float musicVolume { get; private set; }
+    public static float soundEffectsVolume { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -57,5 +61,15 @@ public class MainManager : MonoBehaviour
         Application.Quit();
 
         #endif
+    }
+
+    public void OnMusicSliderValue(float value)
+    {
+        musicVolume = value;
+    }
+
+    public void OnSoundEffectSliderValue(float value)
+    {
+        soundEffectsVolume = value;
     }
 }

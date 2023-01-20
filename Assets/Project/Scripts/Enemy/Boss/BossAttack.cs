@@ -42,7 +42,6 @@ public class BossAttack : MonoBehaviour
 
     public void Attack()
     {
-        animator.SetTrigger("Attack");
         attackCol.enabled = true;
         Invoke(nameof(AttackReady), atkDelay);
     }

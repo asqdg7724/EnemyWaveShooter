@@ -16,8 +16,11 @@ public class PlayerShooting : MonoBehaviour
     private LineRenderer shootLine;
     private Light gunLight;
 
+    private SoundPlayer soundPlayer;
+
     GameObject enemy;
     private EnemyHealth eh;
+    private BossHealth bh;
 
     // Start is called before the first frame update
     void Awake()
@@ -25,6 +28,7 @@ public class PlayerShooting : MonoBehaviour
         shootLine = GetComponent<LineRenderer>();
         gunLight = GetComponent<Light>();
         layerMask = LayerMask.GetMask("Shootable");
+        soundPlayer = GetComponentInParent<SoundPlayer>();
     }
 
     // Update is called once per frame
@@ -50,6 +54,8 @@ public class PlayerShooting : MonoBehaviour
     {
         timer = 0f;
 
+        soundPlayer.SoundPlay(0);
+
         Debug.Log("발사됨");
         
         shootLine.SetPosition(0, transform.position);
@@ -73,6 +79,17 @@ public class PlayerShooting : MonoBehaviour
                     {
                         eh.TakeDamage(damage, shootHit.point);
                         Debug.Log("맞음!");
+                    }
+                }
+
+                if (shootHit.collider.tag == "Boss")
+                {
+                    var bh = shootHit.collider.GetComponent<BossHealth>();
+
+                    if (bh != null)
+                    {
+                        bh.TakeDamage(damage, shootHit.point);
+                        Debug.Log("보스 맞음!");
                     }
                 }
             }

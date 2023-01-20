@@ -13,10 +13,16 @@ public class BossMovement : MonoBehaviour
     Animator animator;
 
     private bool playerInRange = false;
-    private bool alreadyAttack = false;
+    private bool slideInRange = false;
+    public bool attacking = false;
+    public bool sliding = false;
+    public bool boost = false;
 
-    public float attackRange = 2f;
+    public float attackRange = 3f;
+    public float slideRange = 6f;
     private BossAttack bossAtk;
+    public float slideDistance;
+
 
     private float timer;
 
@@ -39,44 +45,79 @@ public class BossMovement : MonoBehaviour
     void Update()
     {
         agent.destination = targetPos.position;
+        slideDistance = Vector3.Distance(targetPos.position, thisPos.position);
 
         timer += Time.deltaTime;
         playerInRange = Physics.CheckSphere(thisPos.position, attackRange, 1 << 6);
+        slideInRange = Physics.CheckSphere(thisPos.position, slideRange, 1 << 6);
 
-        if (!playerInRange && !alreadyAttack)
+        if (!playerInRange && !attacking && !sliding)
         {
             animator.SetBool("isMoving", true);
-            alreadyAttack = true;
+            
         }
 
-        else if (playerInRange && alreadyAttack)
+        if (!playerInRange && attacking && !sliding)
+        {
+            bossAtk.AttackReady();
+            attacking = false;
+        }
+
+        if (playerInRange && !attacking && !sliding)
         {
             StartCoroutine(Attack());
         }
+
+        if (slideDistance >= 15f && !boost && !sliding)
+        {
+            agent.speed = 9;
+
+            boost = true;
+
+            if (slideInRange && !playerInRange && !sliding && boost)
+            {
+                sliding = true;
+
+                if (slideInRange && sliding)
+                {
+                    StartCoroutine(SlideAttack());
+                }
+                
+                else if (!slideInRange && !sliding && !boost)
+                {
+                    bossAtk.AttackReady();
+                    animator.SetTrigger("Idle");
+                }
+            }
+        } 
     }
 
     IEnumerator Attack()
     {
+        agent.speed = 5;
         agent.enabled = false;
+        boost = false;
         animator.SetBool("isMoving", false);
+        animator.SetTrigger("Attack");
         bossAtk.Attack();
-        yield return new WaitForSeconds(2f);
-        alreadyAttack = false;
+        attacking = true;
+        yield return new WaitForSeconds(1f);
         agent.enabled = true;
     }
 
     IEnumerator SlideAttack()
     {
-        alreadyAttack = false;
-        animator.SetBool("isMoving", true);
+        boost = false;
+        animator.SetTrigger("Slide");
+        bossAtk.Attack();
         yield return new WaitForSeconds(3f);
-        alreadyAttack = true;
-        agent.destination = targetPos.position;
+        sliding = false;
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, slideRange);
     }
 }

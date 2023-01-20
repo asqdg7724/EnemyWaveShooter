@@ -64,7 +64,6 @@ public class AttackEnemy : MonoBehaviour
 
     void Attack()
     {
-        
         attackCol.SetActive(true);
         Invoke(nameof(AttackReset), atkDelay);
     }

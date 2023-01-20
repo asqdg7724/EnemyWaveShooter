@@ -7,6 +7,8 @@ public class EnemyAttack : MonoBehaviour
     private PlayerHp playerHp;
     GameObject player;
 
+    public int atk;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,7 +26,7 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            playerHp.TakeDamage(10);
+            playerHp.TakeDamage(atk);
         }
     }
 

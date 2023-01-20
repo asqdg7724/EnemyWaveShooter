@@ -14,6 +14,7 @@ public class PlayerHp : MonoBehaviour
 
     private PlayerController playerCtrl;
     private GameManager gmg;
+    private SoundPlayer soundPlayer;
     Animator animator;
 
     public bool isDead;
@@ -24,12 +25,20 @@ public class PlayerHp : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         playerCtrl = GetComponent<PlayerController>();
+        soundPlayer = GetComponent<SoundPlayer>();
         hp = maxHp;
     }
 
     // Update is called once per frame
     void Update()
     {
+        hpSlider.value = hp;
+
+        if (hp >= maxHp)
+        {
+            hp = maxHp;
+        }
+
         if (isDamage && !isDead)
         {
             dmgImage.color = flashColor;
@@ -47,9 +56,9 @@ public class PlayerHp : MonoBehaviour
     {
         isDamage = true;
 
-        hp -= amount;
+        soundPlayer.SoundPlay(1);
 
-        hpSlider.value = hp;
+        hp -= amount;
 
         if (hp <= 0 && !isDead)
         {
@@ -63,8 +72,20 @@ public class PlayerHp : MonoBehaviour
 
         playerCtrl.enabled = false;
 
+        soundPlayer.SoundPlay(2);
+
         animator.SetTrigger("Dead");
 
         GameManager.gmg.OpenGameOver();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Aid")
+        {
+            hp = hp + 20;
+
+            other.gameObject.SetActive(false);
+        }
     }
 }
