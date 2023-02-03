@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
 
     public void WaveStrong()
     {
-        if (enemyCount % 20 == 0)
+        if (enemyCount % 20 == 0 && enemyCount <= 280)
         {
             wave += 1;
         }
@@ -92,10 +92,12 @@ public class GameManager : MonoBehaviour
 
         if (wave == 15)
         {
+            bossAppear = true;
+
             Debug.Log("°­ÇØÁü");
             //GameObject.Find("Boss").SetActive(true);
             //StartCoroutine(BlinkText(4f));
-            if (bossAppear)
+            if (bossAppear && enemyCount == 280)
             {
                 StartCoroutine(BlinkText(4f));
             }
@@ -194,8 +196,6 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
-
-        bossAppear = false;
         boss.SetActive(true);
     }
 }

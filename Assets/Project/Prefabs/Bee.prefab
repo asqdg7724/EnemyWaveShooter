@@ -707,7 +707,7 @@ MonoBehaviour:
   attackCol: {fileID: 2618397864199397931}
   dmgDelay: 0.5
   atkDelay: 3
-  atkDamge: 10
+  atkDamge: 5
   attackRange: 1.5
 --- !u!114 &2618397864656421927
 MonoBehaviour:
@@ -813,3 +813,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe14be3922a6b8145b642e0d8c436c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atk: 0

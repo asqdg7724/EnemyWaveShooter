@@ -477,7 +477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHp: 3
   dmgDelay: 0.5
-  atkDamge: 10
+  atkDamge: 5
 --- !u!114 &2390569999014344580
 MonoBehaviour:
   m_ObjectHideFlags: 0
